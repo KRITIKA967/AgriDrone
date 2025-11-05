@@ -1,8 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { useNavigate } from "react-router-dom"; // ✅ Import navigation hook
 
 const DroneMonitoring = () => {
+  const navigate = useNavigate(); // ✅ Initialize navigate function
+
   return (
     <div
       style={{
@@ -27,18 +29,34 @@ const DroneMonitoring = () => {
       >
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
           <img
-            src="/drone-logo.png"
+            src="https://i.pinimg.com/736x/8c/37/44/8c3744ff2025fbffa4184cb8be6b4c5a.jpg"
             alt="logo"
             style={{ width: "45px", height: "45px" }}
           />
           <h2 style={{ color: "#2E7D32", fontWeight: "700" }}>AgriDrone</h2>
         </div>
 
+        {/* ===== NAVIGATION LINKS ===== */}
         <div style={{ display: "flex", gap: "2rem" }}>
-          {["Home", "Monitoring", "Live Map", "History", "Status"].map((item) => (
+          {/* ✅ Home now navigates to Dashboard */}
+          <a
+            onClick={() => navigate("/dashboard")}
+            style={{
+              color: "#2E7D32",
+              textDecoration: "none",
+              fontWeight: "500",
+              fontSize: "1rem",
+              cursor: "pointer",
+            }}
+          >
+            Home
+          </a>
+
+          {/* Static section links */}
+          {["About", "Features", "FAQ", "Contact"].map((item) => (
             <a
               key={item}
-              href="#"
+              href={`#${item.toLowerCase()}`}
               style={{
                 color: "#2E7D32",
                 textDecoration: "none",
@@ -71,16 +89,18 @@ const DroneMonitoring = () => {
         style={{
           position: "relative",
           overflow: "hidden",
+          width: "100vw",
+          height: "100vh",
           borderBottomLeftRadius: "2rem",
           borderBottomRightRadius: "2rem",
         }}
       >
         <img
-          src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1350&q=80"
+          src="https://cdn.pixabay.com/photo/2019/05/15/11/24/dji-4204799_960_720.jpg"
           alt="Drone Monitoring"
           style={{
             width: "100%",
-            height: "80vh",
+            height: "100vh",
             objectFit: "cover",
             filter: "brightness(70%)",
           }}
