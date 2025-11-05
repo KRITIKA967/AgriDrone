@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, Activity, History, RadioTower } from "lucide-react";
+import { MapPin, Activity, History, RadioTower, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
@@ -30,8 +30,8 @@ const Dashboard = () => {
     <div
       style={{
         minHeight: "100vh",
-        width: "100vw", // Ensures full width, no gap on right
-        overflowX: "hidden", // Removes horizontal scroll
+        width: "100vw",
+        overflowX: "hidden",
         background: colors.gradient,
         display: "flex",
         flexDirection: "column",
@@ -39,9 +39,34 @@ const Dashboard = () => {
         justifyContent: "center",
         padding: "3rem 1.5rem",
         fontFamily: "'Poppins', sans-serif",
+        position: "relative",
       }}
     >
-      {/* Header */}
+      {/* ===== Back to Home Button ===== */}
+      <button
+        onClick={() => navigate("/")}
+        style={{
+          position: "absolute",
+          top: "2rem",
+          left: "2rem",
+          display: "flex",
+          alignItems: "center",
+          gap: "0.5rem",
+          backgroundColor: "#FBC02D",
+          color: "white",
+          border: "none",
+          padding: "0.6rem 1rem",
+          borderRadius: "8px",
+          fontWeight: "600",
+          cursor: "pointer",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+        }}
+      >
+        <ArrowLeft size={18} />
+        Back to Home
+      </button>
+
+      {/* ===== Header ===== */}
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -57,7 +82,7 @@ const Dashboard = () => {
         AgriDrone Dashboard
       </motion.h1>
 
-      {/* Dashboard Sections */}
+      {/* ===== Dashboard Sections ===== */}
       <div
         style={{
           display: "grid",
