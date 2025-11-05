@@ -9,15 +9,15 @@ import {
   Shield,
   Sprout,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom"; // ✅ Import navigation hook
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const navigate = useNavigate(); // ✅ Create navigation instance
+  const navigate = useNavigate();
 
   const colors = {
-    primary: "#2E7D32", // main green
-    accent: "#F9D976", // warm beige/yellow
+    primary: "#2E7D32",
+    accent: "#F9D976",
     text: "#444",
     lightBg: "#F7F7F7",
   };
@@ -27,7 +27,7 @@ const LandingPage = () => {
       icon: <Leaf className="w-8 h-8" style={{ color: colors.primary }} />,
       title: "Organic Farming",
       desc: "Sustainable, eco-friendly practices to restore soil health and purity.",
-      img: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=60",
+      img: "https://cdn.pixabay.com/photo/2016/11/18/16/51/leaves-1835780_1280.jpg",
     },
     {
       icon: <Tractor className="w-8 h-8" style={{ color: colors.primary }} />,
@@ -39,13 +39,13 @@ const LandingPage = () => {
       icon: <Droplet className="w-8 h-8" style={{ color: colors.primary }} />,
       title: "Irrigation Solutions",
       desc: "Water-efficient systems to ensure optimal hydration and sustainable use.",
-      img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=60",
+      img: "https://cdn.pixabay.com/photo/2022/06/14/17/54/irrigation-7262563_1280.jpg",
     },
     {
       icon: <Shield className="w-8 h-8" style={{ color: colors.primary }} />,
       title: "Pest Protection",
       desc: "AI alerts for pest detection and natural prevention methods for safe crops.",
-      img: "https://images.unsplash.com/photo-1578321272228-3f8d64f29511?auto=format&fit=crop&w=800&q=60",
+      img: "https://cdn.pixabay.com/photo/2021/02/07/08/26/mini-green-house-farming-5990483_1280.jpg",
     },
   ];
 
@@ -67,47 +67,56 @@ const LandingPage = () => {
         }
       `}</style>
 
-      {/* NAVBAR */}
+      {/* ===== NAVBAR ===== */}
       <header
         className="fixed top-0 left-0 w-full shadow-sm z-50"
         style={{
-          backgroundColor: "rgba(255,255,255,0.9)",
+          backgroundColor: "rgba(255,255,255,0.95)",
           backdropFilter: "blur(6px)",
         }}
       >
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+        <div className="max-w-7xl mx-auto flex justify-between items-center px-8 py-4">
+          {/* Logo */}
           <div
-            className="text-2xl font-bold flex items-center gap-2"
+            className="text-2xl font-bold flex items-center gap-2 cursor-pointer"
             style={{ color: colors.primary }}
+            onClick={() => navigate("/dashboard")}
           >
             <Sprout className="w-6 h-6" />
             AgriDrone
           </div>
 
-          <nav className="hidden md:flex gap-10 font-medium items-center">
+          {/* Navbar Links (Desktop) */}
+          <nav
+            className="hidden md:flex font-medium items-center"
+            style={{
+              gap: "3rem", // Increased spacing between links
+            }}
+          >
+            <a
+              onClick={() => navigate("/dashboard")}
+              className="cursor-pointer hover:text-green-700 transition text-lg"
+              style={{ color: colors.primary }}
+            >
+              Home
+            </a>
+
             {["About", "Features", "FAQ", "Contact"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="hover:text-green-700 transition"
-                style={{ color: colors.primary }}
+                className="cursor-pointer hover:text-green-700 transition text-lg"
+                style={{
+                  color: colors.primary,
+                  letterSpacing: "0.5px",
+                }}
               >
                 {item}
               </a>
             ))}
           </nav>
 
-          <button
-            onClick={() => navigate("/dashboard")} // ✅ Navigate to dashboard
-            className="hidden md:block px-6 py-2 rounded-full font-semibold transition"
-            style={{
-              backgroundColor: colors.primary,
-              color: "white",
-            }}
-          >
-            Get Started
-          </button>
-
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="md:hidden"
@@ -117,13 +126,21 @@ const LandingPage = () => {
           </button>
         </div>
 
+        {/* Mobile Dropdown Menu */}
         {menuOpen && (
-          <div className="md:hidden bg-white shadow-md w-full text-center py-4">
+          <div className="md:hidden bg-white shadow-md w-full text-center py-4 space-y-2">
+            <a
+              onClick={() => navigate("/dashboard")}
+              className="block py-2 text-lg font-medium cursor-pointer hover:text-green-700 transition"
+              style={{ color: colors.primary }}
+            >
+              Home
+            </a>
             {["About", "Features", "FAQ", "Contact"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="block py-2 text-lg font-medium"
+                className="block py-2 text-lg font-medium hover:text-green-700 transition"
                 style={{ color: colors.primary }}
               >
                 {item}
@@ -133,7 +150,7 @@ const LandingPage = () => {
         )}
       </header>
 
-      {/* HERO SECTION */}
+      {/* ===== HERO SECTION ===== */}
       <section
         className="relative flex flex-col justify-center items-center text-center h-screen px-6"
         style={{
@@ -155,19 +172,17 @@ const LandingPage = () => {
           <h1
             className="text-5xl md:text-6xl font-extrabold leading-tight mb-6"
             style={{
-              color: "#e2ad0ee3",
-              textShadow: "2px 2px 10px rgba(0, 0, 0, 0)",
+              color: "#e2ad0eda",
             }}
           >
             Transforming Agriculture with{" "}
-            <span style={{ color: "#03030398" }}>Smart Drones</span>
+            <span style={{ color: "#000000d5" }}>Smart Drones</span>
           </h1>
 
           <p
             className="text-lg md:text-xl font-medium mb-10"
             style={{
-              color: "#52d141ff",
-              textShadow: "1px 1px 6px rgba(0, 0, 0, 0.01)",
+              color: "#11b111ff",
             }}
           >
             Empowering farmers through technology, sustainability, and precision.
@@ -175,7 +190,7 @@ const LandingPage = () => {
 
           <div className="flex justify-center gap-6">
             <button
-              onClick={() => navigate("/dashboard")} // ✅ Navigate to dashboard
+              onClick={() => navigate("/dashboard")}
               className="font-semibold px-8 py-3 rounded-full transition shadow-md"
               style={{
                 backgroundColor: colors.accent,
@@ -197,7 +212,7 @@ const LandingPage = () => {
         </motion.div>
       </section>
 
-      {/* FEATURES */}
+      {/* ===== FEATURES ===== */}
       <section
         id="features"
         className="py-20 text-center"
@@ -238,7 +253,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* CONTACT */}
+      {/* ===== CONTACT SECTION ===== */}
       <section
         id="contact"
         className="py-20 text-center"
@@ -280,7 +295,7 @@ const LandingPage = () => {
         </form>
       </section>
 
-      {/* FOOTER */}
+      {/* ===== FOOTER ===== */}
       <footer
         className="text-center py-6 text-sm"
         style={{ backgroundColor: "#1B4D1B", color: "#E8F5E9" }}
