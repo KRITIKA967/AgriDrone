@@ -1,7 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // ✅ Import navigation hook
 
 const LiveDroneMap = () => {
+  const navigate = useNavigate(); // ✅ Initialize navigate
+
   return (
     <div
       style={{
@@ -10,7 +13,7 @@ const LiveDroneMap = () => {
         backgroundColor: "#f4f1e8",
       }}
     >
-      {/* NAVBAR */}
+      {/* ===== NAVBAR ===== */}
       <nav
         style={{
           display: "flex",
@@ -24,20 +27,37 @@ const LiveDroneMap = () => {
           zIndex: 100,
         }}
       >
+        {/* Logo */}
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
           <img
-            src="/drone-logo.png"
+            src="https://i.pinimg.com/736x/8c/37/44/8c3744ff2025fbffa4184cb8be6b4c5a.jpg"
             alt="logo"
             style={{ width: "45px", height: "45px" }}
           />
           <h2 style={{ color: "#2E7D32", fontWeight: "700" }}>AgriDrone</h2>
         </div>
 
+        {/* ===== NAVIGATION LINKS ===== */}
         <div style={{ display: "flex", gap: "2rem" }}>
-          {["Home", "Monitoring", "Live Map", "History", "Status"].map((item) => (
+          {/* ✅ Home navigates to Dashboard */}
+          <a
+            onClick={() => navigate("/dashboard")}
+            style={{
+              color: "#2E7D32",
+              textDecoration: "none",
+              fontWeight: "500",
+              fontSize: "1rem",
+              cursor: "pointer",
+            }}
+          >
+            Home
+          </a>
+
+          {/* Other sections */}
+          {["About", "Features", "FAQ", "Contact"].map((item) => (
             <a
               key={item}
-              href="#"
+              href={`#${item.toLowerCase()}`}
               style={{
                 color: "#2E7D32",
                 textDecoration: "none",
@@ -50,6 +70,7 @@ const LiveDroneMap = () => {
           ))}
         </div>
 
+        {/* Call Button */}
         <button
           style={{
             backgroundColor: "#FBC02D",
@@ -65,7 +86,7 @@ const LiveDroneMap = () => {
         </button>
       </nav>
 
-      {/* HERO SECTION */}
+      {/* ===== HERO SECTION ===== */}
       <section
         style={{
           position: "relative",
@@ -77,16 +98,18 @@ const LiveDroneMap = () => {
         }}
       >
         <img
-          src="https://images.unsplash.com/photo-1600003015698-4e089d7b5c8d?auto=format&fit=crop&w=1920&q=80"
+          src="https://cdn.pixabay.com/photo/2017/07/30/12/24/drone-2554176_1280.jpg"
           alt="Live Drone Map"
           style={{
             width: "100vw",
             height: "100vh",
             objectFit: "cover",
             display: "block",
+            filter: "brightness(70%)",
           }}
         />
 
+        {/* ===== HERO TEXT ===== */}
         <div
           style={{
             position: "absolute",
@@ -106,6 +129,7 @@ const LiveDroneMap = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            style={{ letterSpacing: "2px", fontSize: "1.2rem" }}
           >
             LIVE DRONE MAP
           </motion.h3>
